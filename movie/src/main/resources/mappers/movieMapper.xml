@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie">
+
+
+
+
+<select id="movieList" resultType="com.movie.vo.MovieVO">
+
+
+ select * from cha_movie
+
+
+</select>
+
+
+<select id="movieDetail" parameterType="String" resultType="com.movie.vo.MovieVO">
+
+
+select * from cha_movie where movieTitle = #{movieTitle}
+
+
+</select>
+
+
+
+<insert id="movieInsert" parameterType="com.movie.vo.MovieVO">
+
+insert into cha_movie(seq,img,movieAge,movieTitle,movieRate,movieOpenDate) values ( 0, #{img}, #{movieAge}, #{movieTitle}, #{movieRate}, #{movieOpenDate})
+
+</insert>
+
+
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket">
+
+
+
+
+<insert id="insertTicket" parameterType="com.movie.vo.TicketVO">
+
+insert into cha_ticket ( title , ticketPeople,  runningTime, movieDate, ticketTime, selectedSeat, selectedSeater, movieAge, memberId, ticketNumber ) 
+values ( #{title}, #{ticketNumber}, #{runningTime},#{movieDate}, now(), #{selectedSeat}, #{selectedTheater}, #{movieAge}, #{id}, #{moviePeople}  )
+
+
+
+</insert>
+
+
+
+
+<insert id="insertPay" parameterType="com.movie.vo.MoviePayVO">
+
+insert into cha_pay ( memberId, payNumber, payDate, payMoney) 
+values(#{id}, #{reserveSequence}, now(), #{payMoney} )
+
+</insert>
+
+
+<delete id="deleteTicket">
+
+delete  from cha_ticket where ticketSeq = 1 order by ticketSeq asc limit 1 
+
+</delete>
+
+
+<select id="selectTicket"  resultType="com.movie.vo.TicketVO">
+
+
+select a.ticketSeq AS reserveSequence,a.title, a.runningTime,a.ticketNumber, a.selectedSeat, a. selectedSeater AS selectedTheater, a.movieAge, a.memberId AS id , a.ticketPeople AS moviePeople, a.ticketTime AS reserveDate,
+
+		b.payDate AS payDate,b.payMoney AS payMoney from cha_ticket AS a join cha_pay AS b on a.memberId = b.memberId
+
+and a.ticketSeq = b.payNumber  where a.memberId = #{id}  order by a.ticketSeq desc limit 1 
+
+
+</select>
+
+
+
+<select id="ticketList" parameterType="com.movie.vo.TicketVO" resultType="com.movie.vo.TicketVO">
+
+
+select ticketSeq AS reserveSequence ,title, runningTime,ticketNumber, movieDate, ticketTime AS reserveDate, selectedSeat, selectedSeater AS selectedTheater, movieAge, memberId AS id, ticketPeople AS moviePeople  from cha_ticket where memberId = #{id} order by ticketSeq desc 
+
+</select>
+
+
+<select id="seatList" resultType="com.movie.vo.TicketVO">
+
+
+select title, selectedSeat, selectedSeater AS selectedTheater from cha_ticket
+
+
+</select>
+
+
+</mapper>

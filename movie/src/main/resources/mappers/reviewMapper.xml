@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+
+
+
+
+<select id="reviewList" resultType="com.movie.vo.ReviewVO">
+
+select * from cha_review where seq = #{seq};
+
+</select>
+
+
+<insert id="reviewInsert" >
+
+insert into cha_review(memberId,reviewContent, reviewDate, seq) values(#{memberId}, #{reviewContent}, now(), #{seq})
+
+
+</insert>
+
+
+<select id="reviewCount" resultType="int" parameterType="int">
+
+select count(*) from cha_review where seq = #{seq};
+
+
+</select>
+
+
+
+<!-- 추천수 up -->
+
+<update id="reviewUp" parameterType="int">
+
+
+update  cha_review set likeCnt =  likeCnt + 1 where reviewNumber = #{reviewNumber};
+
+
+</update>
+
+<!-- 추천수 down -->
+
+<update id="reviewDown" parameterType="int">
+
+update  cha_review set likeCnt =  likeCnt - 1 where reviewNumber = #{reviewNumber};
+
+
+</update>
+
+
+
+<!-- 좋아요 -->
+<!-- 댓글 추천시 추천 테이블에 insert -->
+<insert id="insertLike">
+
+insert into cha_choo ( seq , memberId,reviewNumber) 
+
+values( #{seq}, #{memberId} ,#{reviewNumber} )
+
+
+</insert>
+
+<!-- 댓글 추천 취소시 delete -->
+<delete id="deleteLike">
+
+delete from cha_choo where memberId = #{memberId} and reviewNumber = #{reviewNumber}
+
+</delete>
+
+
+<select id="likeCheck" resultType="int">
+
+select count(*) from cha_choo where memberId = #{memberId} and reviewNumber = #{reviewNumber}
+
+
+</select>
+
+
+
+<!--  업뎃 후 좋아요수 -->
+<select id="likeCount" resultType="int">
+
+select likecnt from cha_review where memberId= #{memberId} and reviewNumber = #{reviewNumber}
+
+
+
+</select>
+
+
+
+</mapper>

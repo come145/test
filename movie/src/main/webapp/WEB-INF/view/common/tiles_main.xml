@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/WEB-INF/view/common/layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="/movie/main2" extends="baseLayout">
+		<put-attribute name="title" value="메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/movie/main2.jsp" />
+	</definition>
+	
+	
+	<definition name="/movie/login" extends="baseLayout">
+		<put-attribute name="title" value="로그인페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/movie/login.jsp" />
+	</definition>
+	
+	
+	<definition name="/ticket/ticket" extends="baseLayout">
+		<put-attribute name="title" value="좌석예약페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/ticket/ticket.jsp" />
+	</definition>
+		
+	<definition name="/ticket/time" extends="baseLayout">
+		<put-attribute name="title" value="시간예약페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/ticket/time.jsp" />
+	</definition>
+
+	<definition name="/ticket/kakao" extends="baseLayout">
+		<put-attribute name="title" value="결 제" />
+		<put-attribute name="body" value="/WEB-INF/view/ticket/kakao.jsp" />
+	</definition>
+		
+	
+	<definition name="/movie/mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/movie/mypage.jsp" />
+	</definition>
+	
+	
+	
+	
+</tiles-definitions>
+
+

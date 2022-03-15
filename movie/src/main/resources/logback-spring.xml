@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+	<!-- Appenders -->
+	
+	<!-- appender = 전달받은 로그를 어디에 출력할지 결정함 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d %5p [%c] %m%n</Pattern>     <!-- encoder = appender에 포함되어 출력할 로그형식을 지정함 -->
+		</encoder>
+	</appender>
+
+	<appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d %5p %m%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- Logger -->
+	<logger name="com.movie" level="DEBUG" appender-ref="console" />
+	<logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
+	<logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
+
+		<!-- logeer =  로그를 출력하는 요소로, level 속성을 통해 출력할 로그의 레벨을 조절하여 appender에 전달합니다.
+					   첫 번째 logger에서 com.board는 src/main/java 디렉터리 안의 자바 패키지 경로를 의미합니다.-->
+		
+		
+		<!--  로그 레벨 
+		
+		fatal = 아주 심각한 상태의 에러를 나타냄
+		
+		error = 요청을 처리하던중 문제가 발생한 상태를 나타냄
+		
+		warn =  프로그램 실행에는 문제가 없지만, 나중에 시스템 에러의 원인이 될 수 있는 경고성을 나타냄
+		
+		info = 어떠한 상태나 정보성 메세지를 나타냄
+		
+		debug = 개발시에 디버그 용도로 사용하는 메세지를 나타냄
+		
+		trace = 디버그 레벨이 너무 광범위한것을 해결하기 위한 좀더 상세한 이벤트를 나타냄
+		
+		-->
+		
+	<!-- Root Logger -->
+	<root level="off">
+		<appender-ref ref="console" />
+	</root>
+</configuration>
