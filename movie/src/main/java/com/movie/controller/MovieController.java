@@ -2,10 +2,10 @@ package com.movie.controller;
 
 
 import java.io.IOException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,12 +23,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;  // JSON의 자바 오브젝트의 직렬화, 역직렬화를 해주는 오픈 소스 자바 라이브러리
@@ -41,7 +39,6 @@ import com.movie.vo.MovieVO;
 import com.movie.vo.ReviewVO;
 
 
-@SessionAttributes("member")
 @Controller
 public class MovieController {
 
@@ -65,7 +62,7 @@ public class MovieController {
 		Document doc; //document = 문서전체
 		
 		 doc = Jsoup.connect("http://www.cgv.co.kr/movies/").get();   // 웹데이터를 가져올 주소
-			
+					
 		 Elements movieTitles = doc.select("div.box-contents strong.title"); //영화제목
 		 Elements imgs = doc.select(".thumb-image > img");		//이미지
 		 Elements movieRates = doc.select(".percent span");   // 예매율
@@ -205,7 +202,6 @@ public class MovieController {
 							
 							String dday = Long.toString(diffDays);
 							
-							logger.info(dday);
 							
 							
 							//  dday 띄위기 , 리뷰

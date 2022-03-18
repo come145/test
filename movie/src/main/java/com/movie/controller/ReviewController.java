@@ -3,6 +3,7 @@ package com.movie.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,11 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movie.service.ReviewService;
 import com.movie.vo.MemberVO;
 import com.movie.vo.ReviewVO;
@@ -84,6 +85,35 @@ public class ReviewController{
 	}
 
 
+	@ResponseBody
+	@RequestMapping(value= "/reviewInsert.do")
+	public String reivewInsert(Model model,HttpSession session,@RequestParam("seq")int seq,ReviewVO vo ) {
+		
+		//MemberVO login = (MemberVO) session.getAttribute("login");
+		
+		//String loginId = login.getMemberId();
+		
+		
+		vo.setMemberId("come145");
+		vo.setSeq(seq);
+		
+		service.reviewInsert(vo);
+		
+		
+		return "/member/test"; 
+				
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/reviewDelete.do")
+	public void reviewDelete(int reviewNumber,HttpSession session) {
+		
+		
+		service.reviewDelete(reviewNumber);
+	
+		
+	}
+	
 	
 	
 }

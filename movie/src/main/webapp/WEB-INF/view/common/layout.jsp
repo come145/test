@@ -37,6 +37,11 @@ if(login!= null) System.out.println(login.toString());
 	   		<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
+			
+			<footer>
+				 	<tiles:insertAttribute name="footer" />
+				
+			</footer>
 	
 		</div>
 	</div>        	

@@ -20,21 +20,22 @@ public class ReviewDaoImpl implements ReviewDao{
 
 	@Override
 	public List<ReviewVO> list(int seq) {
-		// TODO Auto-generated method stub
-		return session.selectList("review.reviewList",seq);
+		
+		
+		return session.selectList("review.reviewList", seq);
 	}
 
 	@Override
-	public void reviewInsert() {
+	public void reviewInsert(ReviewVO vo) {
 		// TODO Auto-generated method stub
 		
-		session.insert("review.reviewInsert");
+		session.insert("review.reviewInsert", vo);
 	}
 
 	@Override
 	public void reviewDelete(int reviewNumber) {
-		// TODO Auto-generated method stub
 		
+		session.delete("review.reviewDelete", reviewNumber);
 	}
 
 	@Override

@@ -11,6 +11,12 @@ select * from cha_review where seq = #{seq};
 
 </select>
 
+<delete id="reviewDelete" >
+
+delete from cha_review where reviewNumber = #{reviewNumber}
+
+</delete>
+
 
 <insert id="reviewInsert" >
 

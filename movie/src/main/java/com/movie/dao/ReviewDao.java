@@ -10,7 +10,7 @@ public interface ReviewDao {
 	
 	public List<ReviewVO> list(int seq);
 	
-	public void reviewInsert();
+	public void reviewInsert(ReviewVO vo);
 	
 	public void reviewDelete(int reviewNumber);
 	

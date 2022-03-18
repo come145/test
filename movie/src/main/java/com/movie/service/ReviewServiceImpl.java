@@ -23,16 +23,17 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void reviewInsert() {
+	public void reviewInsert(ReviewVO vo) {
 		// TODO Auto-generated method stub
 		
-		dao.reviewInsert();
+		dao.reviewInsert(vo);
 	}
 
 	@Override
 	public void reviewDelete(int reviewNumber) {
-		// TODO Auto-generated method stub
 		
+		
+		dao.reviewDelete(reviewNumber);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-         <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,6 +9,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head> 
+
+      <link rel="stylesheet" href="assets/css/reviewModal.css">
+
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -37,7 +40,6 @@
     <link rel="stylesheet" media="all" type="text/css" href="https://img.cgv.co.kr/R2014/css/module.css?20211209" />
     <link rel="stylesheet" media="all" type="text/css" href="https://img.cgv.co.kr/R2014/css/content.css" />
     <link rel="stylesheet" media="all" type="text/css" href="https://img.cgv.co.kr/R2014/css/common.css" />
-    
     <link rel="stylesheet" media="all" type="text/css" href="https://img.cgv.co.kr/R2014/css/eggupdate.css" />
     <link rel="stylesheet" media="print" type="text/css" href="https://img.cgv.co.kr/R2014/css/print.css" />    
     <link rel="stylesheet" type="text/css" href="https://img.cgv.co.kr/R2014/js/jquery.ui/smoothness/jquery-ui-1.10.4.custom.min.css" />
@@ -92,11 +94,9 @@
     <script type="text/javascript">
         //<![CDATA[
         _TRK_CP = "/홈";
-
         app.config('staticDomain', 'https://img.cgv.co.kr/R2014/')
             .config('imageDomain', 'https://img.cgv.co.kr')
             .config('isLogin', 'False');
-
         
         // AD FLOAT
         // 암호화 할 문자열과 키값(상수값)을 매개변수로 받는다.
@@ -120,10 +120,8 @@
                 // 암호화시 사용한 연산과 같아야 한다.
                 output += String.fromCharCode(str.charCodeAt(i) - (parseInt(key) + 123 + i));
             }
-
             return output;
         }
-
         function getCookieVal(offset) {
             var endstr = document.cookie.indexOf(";", offset);
             if (endstr == -1) endstr = document.cookie.length;
@@ -151,11 +149,9 @@
         function CloseAD() {
             var AdUrl = window.location.href;
             var ArrAdUrl = AdUrl.split("/");
-
             var CurCookieName = 'CgvPopAd-' + ArrAdUrl[3];
             var CurCookieUrl = GetCookieAd(CurCookieName);
             var CookieUrl = ArrAdUrl[3];
-
             CookieUrl = EncryptAD(CookieUrl, "15442280");
             setCookieAD(CurCookieName, CookieUrl, '1');
             $(document).find('#ad_float1').hide();
@@ -166,18 +162,15 @@
             var CookieUrl = ArrAdUrl[3];
             var CurCookieName = 'CgvPopAd-' + ArrAdUrl[3];
             var CurCookieUrl = GetCookieAd(CurCookieName);
-
             if (CurCookieUrl == null) {
                 CurCookieUrl = "";
             }
             else {
                 CurCookieUrl = DecryptAD(CurCookieUrl, "15442280");
             }
-
             if (CurCookieUrl.indexOf(CookieUrl) != -1) {
                 $(document).find('#ad_float1').hide();
             }
-
             //section.cgv.co.kr 매거진 체크
             var magazineckurl = GetCookieAd("CgvPopAd-magazine");
             if (magazineckurl != null) {
@@ -188,9 +181,7 @@
                 }
             }
         }
-
         
-
         //]]>
     </script>
     
@@ -311,7 +302,6 @@
                 }
             }
         });
-
         $('.nav').on({
             mouseleave: function (e) {
                 $(this).find('.nav_overMenu').slideUp(200, function () {
@@ -319,23 +309,19 @@
                 });
             }
         });
-
         $('.totalSearch_wrap input[type=text]').on({
             focusin: function () {
                 $('.totalSearch_wrap').addClass("active");
             }
         });
-
         $('.btn_totalSearchAutocomplete_close').on({
             click: function () {
                 $('.totalSearch_wrap').removeClass("active");
             },
             focusout: function (e) {
                 //     $('.totalSearch_wrap').removeClass("active");
-
             }
         });
-
         $(this).on({
             scroll: function (e) {
                 /* S GNB fixed */
@@ -344,7 +330,6 @@
                 var fixedHeaderPosY = headerOffsetT + headerOuterH;
                 var scrollT = $(this).scrollTop();
                 var scrollL = $(this).scrollLeft();
-
                 if (scrollT >= fixedHeaderPosY) {
                     $('.nav').addClass('fixed');
                     $('.fixedBtn_wrap').addClass('topBtn');
@@ -352,7 +337,6 @@
                     $('.nav').removeClass('fixed');
                     $('.fixedBtn_wrap').removeClass('topBtn');
                 }
-
                 /* S > GNB fixed 좌우 스크롤
                 Description
                 - GNB가 fixed 되었을때 좌우 스크롤 되게 처리
@@ -366,7 +350,6 @@
                 /* S GNB fixed */
             }
         });
-
         $('.btn_gotoTop').on({
             click: function () {
                 $('html, body').stop().animate({
@@ -374,62 +357,49 @@
                 }, 400);
             }
         });
-
         //통합검색 상단 검색 버튼
         $('#btn_header_search').on('click', function () {
             if ($('#header_ad_keyword').val() != "")
                 goSearch($('#header_ad_keyword'));      //광고
             else
                 goSearch($('#header_keyword'));
-
             return false;
         });
-
         //통합검색 검색어 입력창
         $('#header_keyword').keyup(function (e) {
             if (e.keyCode == 13) goSearch($('#header_keyword'));
         });
-
     });
-
     //통합검색
     function goSearch($objKeyword) {
-
         if ($objKeyword.val() == "") {
             alert("검색어를 입력해 주세요");
             $objKeyword.focus();
             return false;
         }
-
         location = "/search/?query=" + escape($objKeyword.val());
     }
-
     //검색 입력창 클릭 시 광고값 reset
     $('#header_keyword').on('click', function () {
         $(this).attr('placeholder', '');
         $('#header_ad_keyword').val('');
     });
-
     //상단 키워드 광고 (S)
     function AdSearchExt(txt, SearchText) {
         $('#header_keyword').attr('placeholder', txt);
         $('#header_ad_keyword').val(SearchText);
     }
-
     function hdIcoSet(left, sh) { }
     //상단 키워드 광고 (E)
-
     //상단광고닫기
     function hideCgvTopAd() {
         $(".cgv-ad-wrap").hide();
         $('#wrap_main_notice').parent('div').css('top', 280);
     }
-
     //비즈스프링 클릭로그
     function setClickLog(title) {
         // eval("try{trk_clickTrace('EVT', '" + title + "')}catch(_e){}");
     }
-
 </script>
 <div class="nav">
     <div class="contents">
@@ -677,29 +647,24 @@
             $(this).addClass('selected').siblings().removeClass('selected');
         }
     });
-
     // 프리에그 투표팝업 열기
     $(".link-count").on('click', function () {
         var isLogin = app.config('isLogin');
         if (isLogin) {
-
             // 프리에그 팝업 노출시 선택된 프리에그 표시
             if ($("#preegg_useyn").val() == "Y") 
                 $(".wrap_btn .good").addClass("selected");
             else if ($("#preegg_useyn").val() == "W") 
                 $(".wrap_btn .bad").addClass("selected");
-
             $("#movie-pre-select").css("display", "block");
         }
         else 
             app.goLogin();
     });
-
     // 프리에그 투표팝업 닫기
     $(".btn-close").on('click', function () {
         $("#movie-pre-select").css("display", "none");
     });
-
     // 확인 버튼 클릭시
     $("#btnSave").on('click', function () {
         var movieIdx = "84949";
@@ -711,7 +676,6 @@
         if ($(".wrap_btn .bad").hasClass("selected") == true) {
             selectvalue = "W";
         }
-
         if ($("#preegg_useyn").val() == selectvalue) {
             if ($("#preegg_useyn").val() == "" && selectvalue == "") {
                 alert("프리에그를 선택하지 않았습니다.\n'기대돼요!'를 선택하시면 '기대되는 영화'에 추가됩니다.");
@@ -731,7 +695,6 @@
                 dataType: 'json',
                 success: function (result) {
                     var JObject = JSON.parse(result.d.toString());
-
                     switch (JObject["resultCode"]) {
                         case "-1": // 로그인 필요
                             app.goLogin();
@@ -755,19 +718,15 @@
                             else if ($("#preegg_useyn").val() == "" && selectvalue == "") {
                                 alert("프리에그를 선택하지 않았습니다.\n'기대돼요!'를 선택하시면 '기대되는 영화'에 추가됩니다.");
                             }
-
                             $("#preegg_useyn").val(selectvalue);
                             $(".like .link-count").removeClass("favor").removeClass("hate");
-
                             if(selectvalue == "Y")
                                 $(".like .link-count").addClass("favor").html("<i class=\"sprite_preegg btn_md favor\"></i>프리에그");
                             else if (selectvalue == "W")
                                 $(".like .link-count").addClass("hate").html("<i class=\"sprite_preegg btn_md hate\"></i>프리에그");
                             else 
                                 $(".like .link-count").html("<i class=\"sprite_preegg btn_md default\"></i>프리에그");
-
                             $("#movie-pre-select").css("display", "none");
-
                             break;
                         default:
                             //   alert('Error result Value : ' + result);                    
@@ -1054,7 +1013,6 @@
                         var chart = AmCharts.makeChart("charm", {
                             "type": "radar",
                             "radius": "35%", //넓이
-
                             "dataProvider": [{
                                 "key": "감독연출",
                                 "value": 48,
@@ -1133,15 +1091,12 @@
                             "tapToActivate": false,
                             "rollOverGraphItem": function () {
                                 console.log('rollOverGraphItem')
-
                             }
                         });
-
                         // 2020.05.07 감정포인트 차트(7시방향 1번째, 12시 방향이 3번째 순서로 3번째항목부터 데이터 셋팅)
                         var chart = AmCharts.makeChart("emotion", {
                             "type": "radar",
                             "radius": "35%", //넓이
-
                             "dataProvider": [{
                                 "key": "스트레스 해소",
                                 "value": 53,
@@ -1226,29 +1181,19 @@
                     
                     
                 <script>
-
-
                 
-
-
-
  // 리뷰 추천수 기능
 function commentLike(seq,reviewNumber,memberId,likecnt){ 
-
 	let loginId = '${sessionScope.memberId}';
 	 
 	let likeList = new Array();
-
 	
 	// 리뷰리스트 forEach
     <c:forEach items="${review}" var="reviewList" >
-
 	 // 리뷰넘버 담은 리스트
 	likeList.push('${reviewList.reviewNumber}');
 	
 	</c:forEach>
-
-
 	
 	    $.ajax({
            type : "POST",  
@@ -1256,9 +1201,7 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
            dataType : "json",   
            data : {'seq' : seq ,'reviewNumber' : reviewNumber, 'memberId' : memberId ,'likecnt' : likecnt},
            error : function(){
-
 				if (loginId == "") {
-
 					alert("로그인 필요합니다");
 					location.href = "/main.do";
 						
@@ -1268,51 +1211,152 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 					}
            },
            success : function(likeCheck) {
-
         	   
        		
 				// 인덱스 자리
 				var likezari = likeList.indexOf(String(reviewNumber));
-
 	
 				   if(likeCheck == 0){
-
 		              alert("추천성공");
-
 		              
 			        $('#reviewNumber'+ reviewNumber).load(' .likecnt:eq('+likezari+')');
-
 					
 					}	
                	
                    else if (likeCheck == 1){
-
               		    alert("추천취소");
-
    			        $('#reviewNumber'+ reviewNumber).load(' .likecnt:eq('+likezari+')');
 						
 						
                    }
-
-
            }
 	       });
-
 			}
 
+
+ 
+
+//리뷰 삭제
+function reviewDelete(reviewNumber,memberId) {
+
+		let loginId = '${sessionScope.memberId}';
+		
+		if (memberId == loginId) {
+
+			let realDelete = confirm("정말 삭제하시겟습니까?");
+
+		if(realDelete) {
+
+		$.ajax({
+				data : {
+					reviewNumber : reviewNumber
+					
+				},
+				url : '/reviewDelete.do',
+				type : 'POST',
+				success : function(result){
+	
+					alert("삭제 완료");
+				    $('#movie_point_list_container').load(location.href+' #movie_point_list_container');
+
+					}
+			});		
+				
+
+			}
+		}else {
+			alert("작성자 본인만 삭제 가능합니다");
+			}
+
+	
+	 }
 
 
                 </script>    
 			
+			<!--  리뷰 모달창 -->
+		<div class="wrapper_div">
+			<div class="subject_div">
+					리뷰 등록
+			</div>
+		</div>
 			
+
+		<div class="input_wrap">			
+			<div class="bookName_div" >
+				<h2>${movie.movieTitle}</h2>
+			</div>
+			<br></br>
+		<div class="content_div">
+				<h4>리뷰</h4>
+				<textarea name="content"></textarea>
+			</div>
+		</div>			
+			
+		<div class="btn_wrap" >
+			<a class="cancel_btn">취소</a>
+			<a class="enroll_btn">등록</a>
+		</div>
+
+<script>
+
+// 취소버튼
+$('.cancel_btn').on('click',function(e){
+
+		window.close();  // 팜업창이 닫히는 함수
+});
+
+
+
+$('.enroll_btn').on('click',function(e){
+
+		const seq = ${movie.seq};
+		const memberId = 'come145';
+		const reviewContent = $("textarea").val();
+
+	if (memberId == "") {
+
+			alert("로그인이 필요합니다");
+		}
+
+	else {
+		
+	const data = {
+
+			seq : seq,
+			memberId : memberId,
+			reviewContent : reviewContent
+
+		}
+	
+	$.ajax({
+
+		url : "/reviewInsert.do",
+		data : data,
+		type : 'POST',
+		success : function(result){
+
+				alert("작성 완료");
+			    $('#movie_point_list_container').load(location.href+' #movie_point_list_container');
+				
+			}
+
+		});
+	
+	}	
+});
+
+</script>
+
+			
+<!--  리뷰 모달창 끝 -->
+
+
 
                 </div>
                 <div class="real-rating">
                     <p class="title">관람일 포함 7일 이내 관람평을 남기시면 <strong>CJ ONE 20P</strong>가 적립됩니다. </p>
                     <p class="desc"><span><em>${reviewCount}</em> 명의 실관람객이 평가해주셨습니다.</span></p>
-                    <div class="wrap_btn">
-                        <a class="link-gradewrite" href="javascript:void(0);"><span>평점작성</span></a><a class="link-reviewwrite" href="/movies/point/my-list.aspx"><span>내 평점</span></a>
-                    </div>
                 </div>
                 <!-- //preegg.css 연관 UI -->
                 <ul class="sort" id="sortTab">
@@ -1323,15 +1367,13 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                 <div class="wrap-persongrade">
           
           
-          
-                 
                     <!-- 평점 목록 -->
                     <ul id="movie_point_list_container" class="point_col2">
                     
                     
                     <!--  리뷰단***************************** -->
   <c:forEach var="reviewList" items="${review}">                  
-                    <li class="" id="liCommentFirst32338688" data-spoilercnt="0" data-reportcnt="0">
+                    <li class="" id="reviewNum${reviewList.reviewNumber}" data-spoilercnt="0" data-reportcnt="0">
 		<a href="javascript:return false;" class="screen_spoiler">&nbsp;</a>
 		<div class="box-image">
 			<span class="thumb-image"> 
@@ -1364,12 +1406,11 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 						욕설/비방 신고</a>
 					<div class="notify_wrap">
 						<ul>
-							<li><a href="javascript:return false;" class="ico_spoiler"
-								data-commentidx="32338688" data-ismyspoiler="false"
-								data-spoilercnt="0"><span>스포일러 신고</span></a></li>
-							<li><a href="javascript:return false;" class="ico_swearword"
-								data-commentidx="32338688" data-ismyreport="false"
-								data-reportcnt="0"><span>욕설/비방 신고</span></a></li>
+							<li><a  class="ico_spoiler"
+								><span>리뷰 수정	</span></a></li>
+							<li><a onclick="reviewDelete(${reviewList.reviewNumber}, '${reviewList.memberId}');"  class="ico_swearword">
+									<span>리뷰 삭제</span></a></li>
+					
 						</ul>
 					</div></li>
 			</ul>
@@ -1382,8 +1423,7 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 		</li>
 	
 	</c:forEach>
-		</ul>
- 
+
        <!--  평점 ***************************** -->
                                  
                     
@@ -1572,7 +1612,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                 fjs.parentNode.insertBefore(js, fjs);
             } (document, 'script', 'facebook-jssdk'));
         </script>
-
         <div class="fb-like" style="z-index:2" data-href="http%3a%2f%2fwww.cgv.co.kr%2fmovies%2fdetail-view%2fdefault.aspx%3fmidx%3d84949" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
     </div>-->
 
@@ -1754,7 +1793,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
             location.reload();
             $('.layer-wrap').remove();
         });
-
         // 관람 포인트 등록 확인 버튼 클릭시   
         $(document.body).on("click", "#charmRegBtn", function () {
             var commentIdx = $("#RegCommentIdx").val();
@@ -1809,12 +1847,10 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                 alert("매력 포인트를 1개 이상 선택해주세요.");
                 return;
             }
-
             if (emotion1 == "N" && emotion2 == "N" && emotion3 == "N" && emotion4 == "N" && emotion5 == "N") {
                 alert("감정 포인트를 1개 이상 선택해주세요.");
                 return;
             }  
-
             // 관람 포인트 선택 저장
             var pointObj = app.movie();
             if (!pointObj.setCharmEdit) {
@@ -1822,7 +1858,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                     var url = '/common/ajax/point.aspx/setCharm_AddEmotion';
                     app.ajax().set({ dataType: 'json', url: url, data: data, contentType: "application/json; charset=utf-8", successHandler: callback });
                 }
-
             };
             pointObj.setCharmEdit(JSON.stringify({ 'commentIdx': commentIdx
                                                     , 'movieIdx' : movieIdx
@@ -1851,13 +1886,11 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                         alert("등록 중 오류가 발생 되었습니다.");
                         break;
                     default:
-
                         break;
                 }
             }
         });
     });
-
     // 2020.05.07 관람 포인트 등록 레이어팝업
     function charmPointPop(commentIdx) {
         // 관람 포인트 항목 조회
@@ -1869,7 +1902,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
             }
         };
         charmObj.GetCharmPoint(JSON.stringify({ 'commentIdx': commentIdx }), resultCharmCallback);
-
         //결과
         function resultCharmCallback(result) {
             var $std = $(this),
@@ -1887,7 +1919,7 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 
 <!-- 내가 쓴 평점 -->
 <script id="movie_my_point" type="text/x-jquery-tmpl">
-<li class="user_my_point_list" id="liCommentFirst${CommentIdx}">
+<li class="user_my_point_list" id="liCommentFirst${reviewNumber }">
     <div class="box-image">
         <span class="thumb-image">     
             <img src="${UserSmallImage}"  alt="사용자 프로필" onerror="errorImage(this, {'type':'profile'})"/>                                            
@@ -1912,7 +1944,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 					<a href="javascript:return false;" class="btn_point_like"><span><img {{if IsMyGOOD }}src="http://img.cgv.co.kr/R2014/images/point/ico_point_like.png"{{else}}src="http://img.cgv.co.kr/R2014/images/point/ico_point_default.png"{{/if}} alt="like" class="like_red" /></span><span id='idLikeValue'>${GOODCNT}</span></a>
 				</span>
 			</li>
-
             <li class="point_edit">
                 <a href="" class="btn_edit">평점 수정/삭제 하기</a>
                 <div class="edit_wrap">
@@ -1931,7 +1962,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
 </li>
 </script>
 <script id="movie_point_template" type="text/x-jquery-tmpl">
-
 <li class={{if (SPOILERCNT >= 2 && REPORTCNT >= 2) }} "user_spolierswear"
             {{else (SPOILERCNT >= 2)}} "user_spolier"
             {{else (REPORTCNT >= 2)}} "user_swearword"
@@ -1940,7 +1970,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
     data-SPOILERCNT="${SPOILERCNT}"
     data-REPORTCNT="${REPORTCNT}"
 >
-
     <a href="javascript:return false;" class="screen_spoiler">&nbsp;</a>
     <div class="box-image">
         <span class="thumb-image">   
@@ -1956,7 +1985,6 @@ function commentLike(seq,reviewNumber,memberId,likecnt){
                                     
         </span>
     </div>
-
     <div class="box-contents">
         <ul class="writerinfo">     
         <li class="writer-name"><a href="#select_main" class="commentMore" data-moreUserID="${UserID}" data-moreUserIdNicName="${UserIdNicName}" onclick="getPopList1('${UserID}', '${UserIdNicName}')"; >
@@ -2014,7 +2042,6 @@ var commentOptions;
             var mypointYN = false;    
             var mypointPaneltyYN = false;    
             var mypointShowViewYN = false;    
-
             // 성별/연령별 예매분포 차트 추가
             var data = {
                     
@@ -2024,13 +2051,11 @@ var commentOptions;
                     sex: [
                  ["남 48.2%", 48.2],["여 51.8%", 51.8]
                     ]
-
                 };
                             
             $('#jqplot_sex').graphChart({ 'type': 'donut', 'data': data.sex });
             $('#jqplot_age').graphChart({ 'type': 'bar', 'data': data.age });
             // 성별/연령별 예매분포 차트 추가
-
             //첫 로딩시 호출, 첫 로딩시는 "실관람객"탭이 디폴트여서 실관람객 평이 있냐 여부를 따져야 리스트 갯수가 맞게 나온다. "setMypointAttribute()"함수로 대처시 callback이 setMyPointBuild() 함수와 겹쳐 오락가락 하게 된다%>
             setMypointAttributeFirstLoding();
             searchPointList(1, true, 1, 0);              // 첫 로딩시 평점 조회    
@@ -2038,31 +2063,25 @@ var commentOptions;
             var $stillCut = $('#still_motion'),
                 $stillCutCurrent = $('#stillcut_current'),
                 stillOptions = { 'type': 'photo', 'onBeforeHandler': onBeforeHandler };
-
             function onBeforeHandler(_index) {
                 $stillCutCurrent.text(_index + 1);
             }
             $stillCut.visualMotion(stillOptions);
-
             //$('.btn-admit').on('click', function (e) {
             //    addMovieReviewCommunityAdmit($(this));
             //});
-
             //$('.view_review_detail_popup').on('click', function () {
             //    getReviewDetail($(this));
             //    return false;
             //});
-
             //function getReviewDetail(obj) {
             //    var reviewIdx = obj.attr('data');
             //    app.movie().getReviewDetail({'reviewIdx': parseInt(reviewIdx)}, callback);
-
             //    function callback(result) {
             //        var html = '';
             //        if(!result || result.length < 1) {
             //            return false;
             //        }
-
             //        var title = result['Title'];
             //        var content = result['Content'];
              
@@ -2076,8 +2095,6 @@ var commentOptions;
             //        html += '        </div>';
             //        html += '    <button type="button" class="btn-close">' + title + '닫기</button></div>';
             //        html += '</div>';
-
-
             //        var $std = obj,
 				        //options = {
 				        //    '$target': $std,
@@ -2089,16 +2106,12 @@ var commentOptions;
             //        app.instWin.add(options);
             //    }
             //}
-
             //function addMovieReviewCommunityAdmit(obj) {
             //    var reviewIdx = obj.attr('data');
             //    var em = obj.find('em');
-
             //    app.movie().addMovieReviewCommunityAdmit(JSON.stringify({'idx': parseInt(reviewIdx)}), callback);
-
             //    function callback(result) {
             //        var resultCode = result.resultCode;
-
             //        switch(resultCode)
             //        {
             //            case "-1":
@@ -2128,16 +2141,12 @@ var commentOptions;
                     if(!result || result.length < 1) {
                         return false;
                     }
-
                     $("#movie_my_point").tmpl(result).prependTo("#movie_point_list_container");
                     $('.user_my_point_list .point').point();                    
                 }
             }
-
-
             //add_css82 평점삭제
             function removePointComment(obj) {
-
                 var commentIdx = obj.attr('data');
                 var movieIdx = "84949";
                 app.movie().removePointCheck(JSON.stringify({ 'commentIdx': parseInt(commentIdx), 'mIdx': parseInt(movieIdx) }), callback_pc);
@@ -2162,10 +2171,8 @@ var commentOptions;
                             break;                        
                     }
                 }
-
                 function callback(result) {
                     var resultCode = result.resultCode;
-
                     switch (resultCode) {
                         case "-1":
                             app.goLogin();
@@ -2192,9 +2199,7 @@ var commentOptions;
                 var order = $('.sort>li.on').data('order-type');
                 searchPointList(1, true, 1, order);
                 var cgvEggCountTxt = $('#cgvEggCountTxt').text();
-
                 cgvEggCountTxt = cgvEggCountTxt.split(",").join("");
-
                 var cnt = parseInt(cgvEggCountTxt);
                 cnt = cnt -1;
                 
@@ -2216,11 +2221,9 @@ var commentOptions;
                 if(!orderType) {
                     orderType = $('.sort>li.on').data('order-type');
                 }                
-
                 // 첫로딩후 페이지 이동시 IsGetTotalCount = false 처리됨
                 // 첫로딩시 setPointListBuild()에서 result.TotalCount:전체평점갯수, 페이지 이동시 result.TotalCount:0
                 if(!isGetTotalCount) { isGetTotalCount = false; }
-
                 var isMyPageIndex = 6;
                 var isMyPoint = false;
                 if(mypointYN) {        //내가 쓴 평점이 있다면(첫페이지만 5개 가져온다, 이후는 6개씩) 
@@ -2244,11 +2247,9 @@ var commentOptions;
 	                }
 	            });                                
             }
-
             // 평점 리스트 ajax를 통해 호출한 데이터 노출
             function setPointListBuild(result) {                
                 if(result == null || result.List == null || result.TotalCount  == null) return;
-
                 $("#movie_point_list_container").empty();
                 $("#movie_point_template").tmpl(result.List).appendTo("#movie_point_list_container");
                 
@@ -2256,22 +2257,18 @@ var commentOptions;
                 $('.btn-delete').on('click', function () {
                     removePointComment($(this));
                 });
-
                 // result.List:내가쓴평점 제외한 한페이지에 노출될 평점 목록
                 // result.TotalCount : 10자 이상 평점 총 갯수                
                 var ListCount = result.List.length;
                 var TotalCount = result.TotalCount;                              
-
                 //1페이지 이면서 내가 쓴 평점이 있다면 보여 준다 : 상단 탭 "실관람객", "패널티" "전체" 여부 체크는 "setMyPointBuild()"안에서 체크 한다
                 if(mypointYN && myPointPage == 1 ) {                   
                     ListCount++;                    // 1페이지는 내가쓴평점 추가
-
                     if(TotalCount == 0)
                         TotalCount++;   
                           
                     setMyPointBuild();
                 }
-
                 // 첫 페이징 로딩후 result.TotalCount가 0처리되어 타지 않음
                 if(ListCount <= TotalCount) {
                     setPagingNavigation(TotalCount, 6, '#paging_point', '#movie_point_list_container', searchPointList);
@@ -2279,12 +2276,10 @@ var commentOptions;
 					// 실관람평 건수
 					$(".real-rating .desc span em").html(TotalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 }
-
                 if(result.List.length == 0) {
                     $("#movie_point_list_container li").css("border-right", "none");
                 }
             }
-
             /* 첫로딩시 1번만 호출, 내가 쓴평점이 있는지 전영변수 세팅 및 체크 하는 함수 */            
             function setMypointAttributeFirstLoding() {
                 if ("False" == "True" || "False" == "true") {
@@ -2294,7 +2289,6 @@ var commentOptions;
                 if ("False" == "True" || "False" == "true") {
                     mypointPaneltyYN = true;
                 }
-
                 if ("False" == "True" || "False" == "true") {
                     mypointShowViewYN = true;
                 }                                
@@ -2304,28 +2298,24 @@ var commentOptions;
             function setMypointAttribute() {                
                 var movieIdx = "84949";
                 app.movie().getCommentMy({'movieIdx': parseInt(movieIdx)}, callback);
-
                 function callback(result) 
                 {                    
                     if(!result || result.length < 1) {
                         mypointYN = false;
                         return false;
                     }
-
                     //패널티 회원인지 여부
                     if (result["IsViewer"] && result["IsShowView"] && !result["IsNormal"]) {
                         mypointPaneltyYN = true;     //내평점 패널티
                     }else {
                         mypointPaneltyYN = false;     //내평점 패널티
                     }
-
                     //실관람객인지 여부
                     if (result["IsShowView"]) {
                         mypointShowViewYN = true;     //실관람객
                     }else {
                         mypointShowViewYN = false;     //비실관람객
                     }
-
                     mypointYN = true;
                 }
             }
@@ -2334,13 +2324,10 @@ var commentOptions;
              $(document).on("click", ".ico_spoiler", function() {
                 var obj = $(this);
                 var objLiComment = $("li[id*='liCommentFirst" + obj.attr('data-CommentIdx') + "']");
-
                 var nowSPOILERCNTValue = objLiComment.attr('data-SPOILERCNT');
                 var movieIdx = "84949";
-
                 if (obj.attr('data-isMySpoiler') == "True" || obj.attr('data-isMySpoiler') == "true") {   
                     /* 스포일러 신고 취소 */
-
                     if( confirm("스포일러 신고를 취소하시겠습니까?") ) 
                     {
                         app.movie().setCommentSpoilerDelete(JSON.stringify({ 'commentIdx': parseInt(obj.attr('data-CommentIdx')), 'movieIdx':parseInt(movieIdx) }), callbackSpoilerDelete);
@@ -2419,98 +2406,7 @@ var commentOptions;
                 }
             
             });
-
-
-            //2014.12 욕설/비방 신고 ico_swearword
-             $(document).on("click", ".ico_swearword", function() {
-                var obj = $(this);
-                var objLiComment = $("li[id*='liCommentFirst" + obj.attr('data-CommentIdx') + "']");
-            
-                var nowREPORTCNTValue = objLiComment.attr('data-REPORTCNT');
-                var movieIdx = "84949";
-
-                if (obj.attr('data-IsMyREPORT') == "True" || obj.attr('data-IsMyREPORT') == "true") {   
-                    /* 욕설/비방 신고 취소 */
-                    if( confirm("욕설/비방 신고를 취소하시겠습니까?") ) 
-                    {
-                        app.movie().setCommentReportDelete(JSON.stringify({ 'commentIdx': parseInt(obj.attr('data-CommentIdx')), 'movieIdx':parseInt(movieIdx) }), callbackReportDelete);
-                        function callbackReportDelete(result) {
-                            var resultCode = result.resultCode;
-                            switch(resultCode)
-                            {
-                                case "-1":
-                                    app.goLogin();
-                                    break;
-                                case "0":   
-                                    alert("시스템 오류 입니다.");
-                                    break;
-                                case "1":
-                                    alert("신고가 취소되었습니다.");           
-                                    obj.find('span').html('욕설/비방 신고');
-                                    obj.attr('data-IsMyREPORT', 'Fales');   
-                            
-                                    objLiComment.attr('data-REPORTCNT', Number(nowREPORTCNTValue) - 1);
-                                    if (  Number(objLiComment.attr('data-REPORTCNT')) >= 2 ) {
-                                        objLiComment.children('a').addClass("hide");
-                                        objLiComment.attr("class", "user_swearword");
-                                    }else {
-                                        objLiComment.attr("class", ""); 
-                                
-                                    }
-                                                                                                  
-                                    break;
-                                default:
-                                    alert(resultCode);
-                                    break;
-                            }
-                        }
-                    }
-                }else {
-                    /* 욕설/비방 신고 */
-                    if( confirm("평점 내용에 욕설/비방성 내용이 포함되어 있습니까?") ) 
-                    {
-                        app.movie().setCommentReportInsert(JSON.stringify({ 'commentIdx': parseInt(obj.attr('data-CommentIdx')), 'movieIdx':parseInt(movieIdx) }), callbackReportInsert);
-                
-                        function callbackReportInsert(result) {
-                            var resultCode = result.resultCode;
-                            switch(resultCode)
-                            {
-                                case "-1":
-                                    app.goLogin();
-                                    break;
-                                case "0":   
-                                    alert("시스템 오류 입니다.");
-                                    break;
-                                case "1":
-                                    alert("신고가 접수되었습니다.\n내용 확인 후 반영하도록 하겠습니다.");                            
-                                    obj.find('span').html('욕설/비방 신고 취소');
-                                    obj.attr('data-IsMyREPORT', 'True');
-                                    objLiComment.attr('data-REPORTCNT', Number(nowREPORTCNTValue) + 1);
-
-                                    if (  Number(objLiComment.attr('data-SPOILERCNT')) >= 2 && Number(objLiComment.attr('data-REPORTCNT')) >= 2  ) {
-                                        objLiComment.children('a').removeClass("hide");
-                                        objLiComment.attr("class", "user_spolierswear") 
-                                    }else if (  Number(objLiComment.attr('data-SPOILERCNT')) >= 2 ) {
-                                        objLiComment.children('a').removeClass("hide");
-                                        objLiComment.attr("class", "user_spolier") 
-                                    }else if (  Number(objLiComment.attr('data-REPORTCNT')) >= 2 ) {
-                                        objLiComment.children('a').removeClass("hide");
-                                        objLiComment.attr("class", "user_swearword") 
-                                    }
-                                    break;
-                                case "-2":
-                                    alert("이미 신고 하였습니다.");
-                                    break;
-                                default:
-                                    alert(resultCode);
-                                    break;
-                            }
-                        }
-                    }                                           
-                }
-            
-            });                                         
-
+                                              
             //2014.12 삭제버튼 n
             $(document).on("click", ".ico_delete", function() {
                 removePointComment($(this));
@@ -2523,20 +2419,17 @@ var commentOptions;
                 $('.btn_notify').removeClass('on');
                 return false;
             });
-
             
             $(document).on("click", ".btn_notify", function() {
                 $(this).toggleClass('on');
                 $('.btn_edit').removeClass('on');
                 return false;
             });
-
             
             $(document).on("click", ".screen_spoiler", function() {
                 $(this).addClass('hide');
                 return false;
             });
-
             
             $(document).click(function() {
                 $('.btn_edit').removeClass('on');
@@ -2559,7 +2452,6 @@ var commentOptions;
                 location.replace(updateQueryStringParameter(location.href, "IsMobile", "N"));
                 return false;
             });
-
 			// 회원 평점 모아보기 레이어팝업
 			$('.writerinfo .writer-name a').on('click', function () {
 				return;
@@ -2652,30 +2544,24 @@ var commentOptions;
                 $('#regBtn').on('click', function () {
                     
                     var textReviewContent = $('#textReviewContent').val();
-
                     textReviewContent = textReviewContent.replace(/^\s+/, "");
                     textReviewContent = textReviewContent.replace(/\s+$/g, "");
                     textReviewContent = textReviewContent.replace(/\n/g, "");
                     textReviewContent = textReviewContent.replace(/\r/g, "");
-
                     if (textReviewContent == "") {
                         alert("내용을 입력하지 않았습니다.");
                         $('#textReviewContent').focus();
                         return;
                     }
-
                     // 2018.04.26 박인선 실관람평 10자 미만 등록불가
                     if (textReviewContent.replace(/\s*/g,"").length < 10) {
                         alert("문자를 포함하여 10자 이상(공백 제외) 작성하셔야 등록됩니다.");
                         $('#textReviewContent').focus();
                         return;
                     }
-
                     // [2015-12-08]평점 개편 이후 실관람객 공개 체크 삭제(무조건 true)
                     var isChecked = true;                                                            
-
                     app.movie().getViewUser({ 'movieIdx': '84949', 'isOpenView': isChecked }, callback); /*[2015-12-09]실관람객여부 체크 시 진짜 인지를 확인 & 이미 평점을 작성한 적이 있는지 확인. : upt_mwpark*/
-
                     function callback(result) {
                         var resultCode = result.resultCode;
                         if(resultCode.indexOf("이미 작성하셨습니다") > 0) {
@@ -2703,7 +2589,6 @@ var commentOptions;
                     return false;
                 });
             }
-
             
 			function likeOrNot() {
 				$('.likebox label').on('click', function () {
@@ -2711,13 +2596,11 @@ var commentOptions;
 					$wrap.siblings().removeClass('on');
 					$wrap.addClass('on');
 				});
-
 				$('.likebox input').on('focusin', function() {
 					var $wrap = $(this).parents('.likebox');
 					$wrap.siblings().removeClass('on');
 					$wrap.addClass('on');
 				});
-
 				$('#viewpopup').on('click', function () {
 					var $std = $(this),
 					options = {
@@ -2748,7 +2631,6 @@ var commentOptions;
                     return false;
                 }
             }
-
             //이벤트가 있을 시 eventIdx 에 Event Idx  값 넣기
             
             var EggPoints = 0;
@@ -2773,7 +2655,6 @@ var commentOptions;
                 'url': escape(location.href),
                 'eggPoint' : EggPoints /*[2015-12-08]등록시 eggPoint 파라미터 추가. : add_mwpark*/
             };
-
             app.movie().setPointReview(JSON.stringify(defaults), resultCallback);   /*[2015-12-09] 평점 등록 프로시저. : upt_mwpark*/
             setMypointAttribute();            
             function resultCallback(result) {
@@ -2883,11 +2764,9 @@ var commentOptions;
 								</div>
 							</div>
 						</div>
-
 						<div class="textbox">
 							<textarea cols="" rows="" id="my-list-commentTextArea" maxlength="280" required="required" data-title="평점" data-message="작성글이 입력되지 않았습니다.">${CommentText}</textarea>
 						</div>
-
 						<div class="footbox">
 							<span class="role">
 								<a id="viewpopup" title="새창" href="#" target="_blank">운영원칙 <img src="http://img.cgv.co.kr/R2014/images/common/ico/ico-question-mark.png" alt="?"></a>
@@ -2898,7 +2777,6 @@ var commentOptions;
 								<button type="button" class="round red on" id="my-list-uptBtn"><span>작성완료!</span></button>
 							</div>
 						</div>
-
 					</div>
 					
 				</div>
@@ -2912,7 +2790,6 @@ var commentOptions;
 	</div>
 </script>
 <!--[2015-12-15] 평점 수정 레이어 팝업 템플릿 end : add_mwpark-->
-
 <!-- 2020.05.07 추가 실관람평 > 관람 포인트 선택 수정 -->
 <script id="Script4" type="text/x-jquery-tmpl">
 <div class="layer-wrap" id="my-list-charmLayer" style="width:0px; top:0px;">
@@ -2962,7 +2839,6 @@ var commentOptions;
 </div>
 <!-- //관람 포인트 선택 팝업 -->
 </script>
-
 <script type="text/javascript">
 // 2020.05.07 관람 포인트 선택시 기존값 조회(수정)
 function GetCharm(commentIdx) {
@@ -2972,7 +2848,6 @@ function GetCharm(commentIdx) {
             var url = '/common/ajax/point.aspx/GetCharmPoint_AddEmotion';
             app.ajax().set({ dataType: 'json', url: url, data: data, contentType: "application/json; charset=utf-8", successHandler: callback });
         }
-
     };
     charmObj.GetCharmPoint(JSON.stringify({ 'commentIdx': commentIdx }), resultCharmCallback);
     //결과
@@ -2980,7 +2855,6 @@ function GetCharm(commentIdx) {
         charmPointPop2(result);
     };
 };
-
 // 2020.05.07 관람 포인트 선택 수정 팝업 노출
 function charmPointPop2(result) {
     result.MovieIdx = 84949;
@@ -2995,7 +2869,6 @@ function charmPointPop2(result) {
     charmLayerSetting(result.CommentIdx);
     return false;
 }
-
 // 2020.05.07 관람 포인트 선택 팝업 셋팅
 function charmLayerSetting(commentIdx) {
     var comIdx = commentIdx;
@@ -3013,12 +2886,10 @@ function charmLayerSetting(commentIdx) {
         charmObj.emotion4 = "N";                    
         charmObj.emotion5 = "N";
         charmObj.genre_sms1 = $("#charmGenre_SMS1").val();
-
         if (charmObj.genre_sms1 == "") {
             alert("관람 포인트를 다시 등록해 주세요.");
             return false;
         }
-
         if ($("#effect").prop("checked")) {
             charmObj.effect = "Y";
         }
@@ -3049,12 +2920,10 @@ function charmLayerSetting(commentIdx) {
         if ($("#emotion5").prop("checked")) {
             charmObj.emotion5 = "Y";
         }
-
         if(charmObj.effect == 'N' && charmObj.story == 'N' && charmObj.visual == 'N' && charmObj.acting == 'N' && charmObj.ost == 'N'){
             alert("매력 포인트를 1개 이상 선택해주세요.");
             return;
         }
-
         if (charmObj.emotion1 == "N" && charmObj.emotion2 == "N" && charmObj.emotion3 == "N" && charmObj.emotion4 == "N" && charmObj.emotion5 == "N") {
             alert("감정 포인트를 1개 이상 선택해주세요.");
             return;
@@ -3062,14 +2931,12 @@ function charmLayerSetting(commentIdx) {
         
         charmingEdit(comIdx, charmObj);
     });
-
     // 영화매력 레이어 팝업 닫기버튼.
     $("#my-list-charmCloseBtn").on("click", function () {
         location.reload();
         $("#my-list-charmLayer").remove();
     });
 };
-
 /* 2020.05.07 관람 포인트 선택 팝업 수정*/
 function charmingEdit(commentIdx, charmObj) {
     var movObj = app.movie();
@@ -3078,7 +2945,6 @@ function charmingEdit(commentIdx, charmObj) {
             var url = '/common/ajax/point.aspx/setCharm_AddEmotion';
             app.ajax().set({ dataType: 'json', url: url, data: data, contentType: "application/json; charset=utf-8", successHandler: callback });
         }
-
     };
     movObj.setCharmEdit(JSON.stringify({ 'commentIdx': commentIdx
                                                         , 'movieIdx': Number($("#my-list-charmMovieIdx").val())
@@ -3094,7 +2960,6 @@ function charmingEdit(commentIdx, charmObj) {
                                                         , 'emotion4': charmObj.emotion4
                                                         , 'emotion5': charmObj.emotion5
     }), resultCharmingCallback);
-
     //결과
     function resultCharmingCallback(result) {
         switch (result.resultCode) {
@@ -3112,27 +2977,22 @@ function charmingEdit(commentIdx, charmObj) {
         }
     }
 }
-
     //레이어 팝업 전체 닫기
     function layerAllClose() {
         $("#my-list-uptLayer").remove();
         $("#my-list-charmLayer").remove();
     };
-
 </script>
-
 <script type="text/javascript">
 //<![CDATA[
     (function ($) {
         $(function () {
             var isLogin = app.config('isLogin');
-
             // 평점 삭제하기 클릭 event
             $('.btn-delete').on('click', function () {
                 removePointComment($(this).attr('data'), $(this).attr('midx'));
                 return false;
             });
-
             // 실관람평 수정(작성하기를 클릭하였으나, 이미 작성한 관람평이 있을경우)
             $(document).on("click", ".modifyCommentDummy", function () {
                 var movieIdx = 84949;
@@ -3140,7 +3000,6 @@ function charmingEdit(commentIdx, charmObj) {
                 app.movie().getCommentMy({ 'movieIdx': parseInt(movieIdx) }, getCommentResult);
                 
                 function getCommentResult(result) {
-
                     options = {
                         '$target': $std,
                         'type': 'center',
@@ -3153,7 +3012,6 @@ function charmingEdit(commentIdx, charmObj) {
                     return false;
                 }
             });
-
             /*[2015-12-15] 평점 수정 레이어 팝업 start : add_mwpark*/
             $(document).on("click", ".ico_edit", function () {
                 
@@ -3175,12 +3033,10 @@ function charmingEdit(commentIdx, charmObj) {
                 }
             });
             /*[2015-12-15] 평점 수정 레이어 팝업 end : add_mwpark*/
-
             /*[2015-12-15]레이어 팝업 띄운 후 이벤트 및 각종 설정 처리. start : add_mwpark*/
             function updateLayerSetting() {
                 // 가져온 comment text 의 바이트 수 보이기.
                 $('#text_count').text(fnTextLength($("#my-list-commentTextArea").val()));
-
                 //글자 입력시 바이트 수 반영. 
                 $('#my-list-commentTextArea').count({
                     useMember: true,
@@ -3191,27 +3047,22 @@ function charmingEdit(commentIdx, charmObj) {
                
                 // 평점 수정 버튼 클릭
                 $("#my-list-uptBtn").on("click", function () {
-
                     var textReviewContent = $('#my-list-commentTextArea').val();
-
                     textReviewContent = textReviewContent.replace(/^\s+/, "");
                     textReviewContent = textReviewContent.replace(/\s+$/g, "");
                     textReviewContent = textReviewContent.replace(/\n/g, "");
                     textReviewContent = textReviewContent.replace(/\r/g, "");
-
                     if (textReviewContent == "") {
                         alert("내용을 입력하지 않았습니다.");
                         $('#my-list-commentTextArea').focus();
                         return;
                     }
-
                     // 2018.04.26 박인선 실관람평 10자 미만 등록불가
                     if (textReviewContent.replace(/\s*/g,"").length < 10) {
                         alert("문자를 포함하여 10자 이상(공백 제외) 작성하셔야 등록됩니다.");
                         $('#my-list-commentTextArea').focus();
                         return;
                     } 
-
                     if (confirm("작성한 관람평을 수정하시겠습니까?")) {
                         if (isLogin) {
                             editData();
@@ -3232,7 +3083,6 @@ function charmingEdit(commentIdx, charmObj) {
                     textReviewContent = textReviewContent.replace(/\s+$/g, "");
                     textReviewContent = textReviewContent.replace(/\n/g, "");
                     textReviewContent = textReviewContent.replace(/\r/g, "");
-
                     app.movie().setCommentEdit(JSON.stringify({ 'commentIdx': Number($("#my-list-commentIdx").val())
                                                                                 , "commentText": textReviewContent
                                                                                 , 'movieIdx': Number($("#my-list-movieIdx").val())
@@ -3241,7 +3091,6 @@ function charmingEdit(commentIdx, charmObj) {
                                                                                 , 'withViewer': $("#my-list-withviewer").val()
                                                                                 , 'eggPoint': Number(eggValue)
                     }), resultCallback);
-
                     function resultCallback(result) {
                         switch (result.resultCode) {
                             case "1":
@@ -3269,21 +3118,18 @@ function charmingEdit(commentIdx, charmObj) {
                         }
                     }
                 } 
-
                 //좋아요 , 별로에요 클릭시 빨간 테두리 on
                 $('.likebox label').on('click', function () {
                     var $wrap = $(this).parents('.likebox');
                     $wrap.siblings().removeClass('on');
                     $wrap.addClass('on');
                 });
-
                 //좋아요 , 별로에요 클릭시 빨간 테두리 on
                 $('.likebox input').on('focusin', function () {
                     var $wrap = $(this).parents('.likebox');
                     $wrap.siblings().removeClass('on');
                     $wrap.addClass('on');
                 });
-
                 //운영원칙 ? 클릭시 팝업.
                 $('#viewpopup').on('click', function () {
                     var $std = $(this),
@@ -3297,14 +3143,12 @@ function charmingEdit(commentIdx, charmObj) {
                     app.instWin.add(options);
                     return false;
                 });
-
                 /*[2015-12-15]레이어팝업 "닫음" 버튼 클릭 처리.: add_mwpark*/
                 $("#my-list-uptCloseBtn").on("click", function () {
                     $("#my-list-uptLayer").remove();
                 });
             }
             /*[2015-12-15]레이어 팝업 띄운 후 이벤트 및 각종 설정 처리. end : add_mwpark*/
-
             /*[2015-12-15]입력 글자 바이트 check start : add_mwpark*/
             function fnTextLength(content) {
                 var cnt = 0;
@@ -3322,23 +3166,19 @@ function charmingEdit(commentIdx, charmObj) {
             /*[2015-12-15]입력 글자 바이트 end : add_mwpark*/
         });
     })(jQuery);
-
     //2014.12 추가
     //내가 작성한 평점 내용 불러오기 현재 now
     function getCommentEditResult(movieIdx) {
         app.movie().getCommentMy({ 'movieIdx': parseInt(movieIdx) }, callback);
-
         function callback(result) {
             if (!result || result.length < 1) {
                 return false;
             }
-
             var commentText = result['CommentText'];
             var registDate = result['registDate'];
             var commentIdx = result['CommentIdx'];
             var pointDb = result['Point'];
             var isShowView = result['IsShowView'];
-
             $("div[id*='" + commentIdx + "']").find('.point-on').attr('style', "width: " + pointDb + "0%;");
             $("em[id*='" + commentIdx + "']").html(pointDb);
             $("p[id*='" + commentIdx + "']").html(commentText);
@@ -3352,17 +3192,14 @@ function charmingEdit(commentIdx, charmObj) {
     }
     /*회원 평점 모아보기. mwpark_RR2015*/
     function getPopList1(userid, nick) {
-
         // 2017.07.11 화면 호출 시 POST 방식 호출 변경
         $("#frmPointPopup").attr("target", "ifrm_movie_time_table1");
         $("#frmPointUserId").val(userid);
         $("#frmPointNick").val(escape(nick));
         $("#frmPointPopup").submit();
-
         $("#ifrm_movie_time_table1").show();
     }
      function resizeTopIframe() {
-
         $("#ifrm_movie_time_table1").hide();
     }
     function resizeTop(height) {
@@ -3371,10 +3208,8 @@ function charmingEdit(commentIdx, charmObj) {
 	    /*페이징 처리 추가. mwpark_RR2015 2016-02-17*/
     //function searchReviewList(page, isGetTotalCount) {
 	//    if(!isGetTotalCount) { isGetTotalCount = false; }
-
 	//    app.movie().getReviewSearchList({ 'movieIdx': 84949, 'pageIndex': page, 'pageSize': 5, 'isTotalCount' : isGetTotalCount}, setReviewListBuild);
     //}
-
     //function setReviewListBuild(result) {
 	   // if(result == null || result.List == null || result.TotalCount  == null) {
 		  //  return;
@@ -3386,19 +3221,15 @@ function charmingEdit(commentIdx, charmObj) {
 	    //if(result.List.length <= result.TotalCount) {
 	    //	setPagingNavigation(result.TotalCount, 5, '#paging_review', '#movie_review_list_container', searchReviewList);
 	    //}
-
 	    //$('.view_review_detail_popup').on('click', function () {
 	    //	getReviewDetail($(this));
 	    //	return false;
 	    //});
-
 	    //$('.btn-admit').on('click', function () {
 	    //	addMovieReviewCommunityAdmit($(this));
 	    //});
     //}
 </script>
-
-
             
             <!--/ Contents End -->
 		 </div>
@@ -3444,7 +3275,6 @@ function charmingEdit(commentIdx, charmObj) {
             </div>
         </div>
 	</div>
-
     <!-- E Popup -->
     
     <!-- S 예매하기 및 TOP Fixed 버튼 -->
@@ -3523,23 +3353,18 @@ function charmingEdit(commentIdx, charmObj) {
 <option value="http://www.cjem.net/main/?locale=ko">CJ ENM 엔터테인먼트부문</option>
 <option value="http://corp.cgv.co.kr/">CJ CGV</option>
 </optgroup>
-
         </select>
         <a href="#none" class="btn_familysite" onclick="goFamilySite()">GO</a>
     </section>
 </article>
-
         <!-- footer_area (e) -->
-
         <div class="adFloat" style="display:block">
-
             <iframe src='//ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@Popicon' width='154' height='182' frameborder='0' scrolling='no' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' allowTransparency="true" id="ad_float1"></iframe>
         </div>
         <script type="text/javascript">            OpenAD();</script>
         <!-- //Float Ad -->
 	</footer>
 	<!-- E Footer -->
-
     <!-- Aside Banner :  -->
     <!--
 	<div id="ctl00_sect_person_right" class="sect-aside-banner" style="padding:0; margin:0; position:fixed; z-index:1;display:none">
@@ -3548,7 +3373,6 @@ function charmingEdit(commentIdx, charmObj) {
 				<a href="/theaters/"><img src="https://img.cgv.co.kr/R2014/images/common/btn/btn_person_theater.gif" alt="CGV THEATER" /></a>
 				<a href="/arthouse/"><img src="https://img.cgv.co.kr/R2014/images/common/btn/btn_person_arthouse.gif" alt="CGV arthouse" /></a>
 				<a href="/theaters/special/"><img src="https://img.cgv.co.kr/R2014/images/common/btn/btn_person_special.gif" alt="CGV SPECIAL" /></a>
-
 				<a href="/user/mycgv/reserve/" class="required-login" data-url="/user/mycgv/reserve/"><img src="https://img.cgv.co.kr/R2014/images/common/btn/btn_person_ticket.gif" alt="CGV TICKET INFO" /></a>
 				<a href="/discount/discountlist.aspx"><img src="https://img.cgv.co.kr/R2014/images/common/btn/btn_person_discount.gif" alt="CGV DISCOUNT INFO" /></a>
 			</div>
@@ -3561,8 +3385,6 @@ function charmingEdit(commentIdx, charmObj) {
 	<!-- //Aside Banner -->
     
 </div>
-
-
 <script type="text/template" id="temp_popup_movie_player">
 <div class="popwrap">
     <div class="sect-layerplayer">
@@ -3603,7 +3425,6 @@ function charmingEdit(commentIdx, charmObj) {
     </div>
 </div>
 </script>
-
 <script id="temp_popup_movie_player_movie_info" type="text/x-jquery-tmpl">
 <div class="box-image">
     <a href="/movies/detail-view/?midx=${MovieIdx}" title="${Title} 상세보기 새창">
@@ -3632,7 +3453,6 @@ function charmingEdit(commentIdx, charmObj) {
 {{/if}}
 </div>
 </script>
-
 <script id="temp_popup_movie_player_relation_movie_item" type="text/x-jquery-tmpl">
 <li>
     <div class="box-image">
@@ -3646,7 +3466,6 @@ function charmingEdit(commentIdx, charmObj) {
     </div>
 </li>
 </script>
-
 <script type="text/javascript" src="https://img.cgv.co.kr/R2014//js/system/crypto.js"></script>
 <script type="text/javascript">
     //<![CDATA[
@@ -3662,13 +3481,10 @@ function charmingEdit(commentIdx, charmObj) {
         $('#pop_player_relation_wrap').show();
         $('#btn_movie_replay').focus();
     }
-
     (function ($) {
         $(function () {
-
         
             $('.movie_player_popup').moviePlayer();     //동영상플레이어
-
             //노원타운
             $('.special5_pop').on('click', function () {
                 openNowonTown();
@@ -3680,7 +3496,6 @@ function charmingEdit(commentIdx, charmObj) {
                 $frmSearch.submit();
                 return false;
             });
-
             //메인스킵네비
             $('#skipHeader').on('click', function(){
                 var $ctn = $('#contents');
@@ -3689,7 +3504,6 @@ function charmingEdit(commentIdx, charmObj) {
                 }).focus();				
                 return false;
             });
-
             //현재 URL 해당파라미터 교체
             function updateQueryStringParameter(uri, key, value) {
                 var re = new RegExp("([?|&])" + key + "=.*?(&|#|$)", "i");
@@ -3726,12 +3540,10 @@ function charmingEdit(commentIdx, charmObj) {
     }    
     //]]>
 </script>
-
 <!-- 앱다운로드 레이어 팝업 -->
 <script type="text/javascript">
     //appDownInfoPop();
 </script>
-
 <script language="javascript" type="text/javascript">
     //201402 SYH GA추가
     (function (i, s, o, g, r, a, m) {
@@ -3739,14 +3551,10 @@ function charmingEdit(commentIdx, charmObj) {
             (i[r].q = i[r].q || []).push(arguments)
         }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
     ga('create', 'UA-47126437-1', 'cgv.co.kr'); //지주사
     ga('create', 'UA-47951671-5', 'cgv.co.kr', { 'name': 'cgvTracker' }); //디마팀
     ga('create', 'UA-47951671-7', 'cgv.co.kr', { 'name': 'rollup' }); //추가
-
 </script>
-
-
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NNNFR3"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>    (function (w, d, s, l, i) {
@@ -3758,6 +3566,5 @@ function charmingEdit(commentIdx, charmObj) {
     })(window, document, 'script', 'dataLayer', 'GTM-NNNFR3');
 </script>
 <!-- End Google Tag Manager -->
-
 </body>
 </html>
